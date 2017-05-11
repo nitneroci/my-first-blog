@@ -1,0 +1,32 @@
+<form id="complexQueriesForm">
+<p>
+<div id="complexDataTitlePane" >
+	<input type="text" name="typeForm" id="typeForm" value="complex" style="display:none" />
+	<button class="buttonAddLine" id="buttonComplexForm" >+</button>
+	<button class="buttonRemoveLine" id="buttonComplexFormRemove" >-</button>
+	<div id="dataComplexQueries" >
+		<div id="complexLineQuery1" class="cComplexLineQuery">
+			<select name="dataComplex1" id="dataComplex1" class="cSelectComplex cElementForm" >
+			{% for key, value in dictTablesDatabase.items %}
+				<option value="{{ key }}">{{ key }}</option>
+			{% endfor %}
+			</select>
+			<select name="locationComplex1" id="locationComplex1" class="cSelectComplex cElementForm" >
+			{% for location in arrayLocation %}
+				<option value="{{ location }}">{{ location }}</option>
+			{% endfor %}
+			</select>
+			<select name="ageComplex1" id="ageComplex1" class="cSelectComplex cAge cElementForm" >
+				{% for age in arrayNumber %}
+					<option value="{{ age }}">{{ age }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+</div>
+<div id="complexConditionTitlePane" >
+<textarea name="textareaConditions" id="textareaConditions" rows="5" cols="20" >Conditions</textarea>
+</div>
+<button class="executeButton" >Lancer la requête</button>
+</p>
+</form>

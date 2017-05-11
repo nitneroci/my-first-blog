@@ -1,0 +1,392 @@
+
+<!-- Ici la plupart de ce qui est fait reste basique mais la syntaxe est compléxifié pour que bootstrap fonctionne bien et que le résultat soit plus jolie -->
+    <p>
+    <div id="smartphoneDataTitlePane">
+
+        <!-- DIV avec les radio bouton pour le choix de la bande -->
+        <div class="col-lg-12">
+            Bande :
+            <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary"><input id="choix1" type="radio" name="choixBande" value="0" autocomplete="off">PO</label>
+            <label class="btn btn-primary active"><input id="choix2" type="radio" name="choixBande" value="1" autocomplete="off" CHECKED>MO</label>
+            <label class="btn btn-primary"><input id="choix3" type="radio" name="choixBande" value="2" autocomplete="off" >GO</label>
+            <label class="btn btn-primary"><input id="choix4" type="radio" name="choixBande" value="3" autocomplete="off" >IRI</label>
+            </div>
+        </div>
+
+        <br/>
+
+        <!-- DIV avec la liste des choix de route -->
+        <div class="col-lg-12" style="margin-top: 10px;">
+            Route :
+            <select id="route" class="multicheck" multiple="multiple">
+
+                <!-- listRoad est récupérer par le serveur et contient la liste des routes -->
+                {% for route in listRoad %}
+                <option value="{{ route }}">{{ route }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <br/>
+
+        <!-- DIV de panel dont le but est de s'étendre quand on clique sur l'entête -->
+        <div class="panel panel-primary" style="margin-top:50px;margin-bottom:10;">
+            <!-- DIV avec l'entête -->
+            <div class="panel-heading">
+                <a class="lienBlanc" role="button" data-toggle="collapse" href="#collapseContent1" aria-expanded="false" aria-controls="collapseContent1">Periode d'analyse</a>
+            </div>
+
+            <div class="collapse" id="collapseContent1">
+            <!-- DIV avec le contenu -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            Du
+                        </div>
+                        <!-- Cet enchainement de DIV sert juste à stylisé le choix de la date, il renvera dans le formulaire une chaîne de caractère de la forme : MM/JJ/AAAA -->
+                        <div class="col-lg-8" style="padding:0; height:40px;">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input size="16" type="text" class="form-control" name="debut" id="debut">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            Au
+                        </div>
+                        <!-- De même que pour lenchaînement de DIV précédent -->
+                        <div class="col-lg-8" style="padding:0; height:40px;">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input size="16" type="text" class="form-control" name="fin" id="fin">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Petit script pour initialiser les datepicker -->
+        <script type="text/javascript">
+            $('.datepicker').datepicker();
+        </script>
+
+        <div class="col-lg-12">
+            <!-- Encore un enchaînement de DIV / SPAN durant lequel on stylise un checkbox, cela retourne la même chose qu'un checkbox -->
+            <div class="form-group">
+            <input type="checkbox" name="mesures" id="mesures" autocomplete="off" />
+                <div class="[ btn-group ]">
+                    <label for="mesures" class="[ btn btn-primary ]">
+                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                        <span> </span>
+                    </label>
+                    <label for="mesures" class="[ btn btn-default active ]">
+                        Afficher les mesures
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <!-- DIV avec les radio bouton pour le choix du sens -->
+        <div class="col-lg-12">
+            Sens :
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary"><input id="choix5" type="radio" name="choixSens" value="0" autocomplete="off">positif</label>
+                <label class="btn btn-primary"><input id="choix6" type="radio" name="choixSens" value="1" autocomplete="off">négatif</label>
+                <label class="btn btn-primary active"><input id="choix7" type="radio" name="choixSens" value="2" CHECKED autocomplete="off">les deux sens</label>
+            </div>
+        </div>
+
+
+        <br/>
+
+        <!-- DIV avec la liste des choix de capteur -->
+        <div class="col-lg-12" style="margin-top: 10px;">
+            Capteur :
+            <select id="capteur" class="multicheck" multiple="multiple">
+
+                <!-- listCapteur est récupérer par le serveur et contient la liste des capteurs -->
+                {% for capteur in listCapteur %}
+                <option value="{{ capteur }}">N° {{ capteur }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <br/>
+
+        <!-- DIV de panel dont le but est de s'étendre quand on clique sur l'entête -->
+        <div id="vehicule" class="panel panel-primary" style="margin-top:70px;margin-bottom:10;">
+            <!-- DIV avec l'entête -->
+            <div class="panel-heading">
+                <a class="lienBlanc" role="button" data-toggle="collapse" href="#collapseContent2" aria-expanded="false" aria-controls="collapseContent2">Vehicule</a>
+            </div>
+
+            <div class="collapse" id="collapseContent2">
+                <!-- DIV avec le contenant -->
+                <div class="panel-body">
+                    <!-- La liste de choix pour le type (tel que pour les capteurs) -->
+                    <div class="col-lg-6">
+                        Type :
+                        <select id="typeVehicule" class="multicheck" multiple="multiple">
+
+                            <option value="VL">VL</option>
+                            <option value="UTIL">UTIL</option>
+                            <option value="PL">PL</option>
+
+                        </select>
+                    </div>
+
+                    <!-- La liste de choix pour le marque (tel que pour les capteurs) -->
+                    <div class="col-lg-6">
+                        Marque :
+                        <select id="marqueVehicule" class="multicheck" multiple="multiple">
+
+                            {% for marque in listMarque %}
+                                <option value="{{ marque }}">Du {{ marque }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <br/>
+
+                    <!-- La liste de choix pour le modele (tel que pour les capteurs) -->
+                    <div class="col-lg-6">
+                        Modele :
+                        <select id="modeleVehicule" class="multicheck" multiple="multiple">
+
+                            {% for modele in listModele %}
+                                <option value="{{ modele }}">Le {{ modele }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- La liste de choix pour l'immatriculation (tel que pour les capteurs) -->
+                    <div class="col-lg-6">
+                        Immat :
+                        <select id="immatVehicule" class="multicheck" multiple="multiple">
+
+                            {% for immat in listImmat %}
+                                <option value="{{ immat }}">N° {{ immat }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- La liste de choix pour le pseudo (tel que pour les capteurs) -->
+        <div class="col-lg-12">
+            Pseudo :
+            <select id="pseudo" class="multicheck" multiple="multiple">
+
+                {% for pseudo in listPseudo %}
+                <option value="{{ pseudo }}"> {{ pseudo }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+    <!-- Script avec l'initialisation des liste à cocher -->
+        <script type="text/javascript">
+
+        $(function() {
+
+            $('.multicheck').multiselect({
+
+                includeSelectAllOption: true,
+                maxHeight: 200
+            });
+        });
+
+        </script>
+
+        <br/>
+
+    <!-- DIV contenant au final un checkbox, accompagné de son label, et un input pour un nombre avec son label aussi -->
+        <div class="col-lg-12" style="margin-top:10px;">
+            <div class="input-group">
+                <!-- Le SPAN du checkbox -->
+                <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                    <input id="filtreVitesse" name="filtreVitesse" type="checkbox" class="form-control">
+                </span>
+                <!-- Son label -->
+                <div class="input-group-addon"> Activer le filtrage vitesse >=</div>
+                <!-- Le input avec un nombre -->
+                <input id="vitesse" class="form-control" name="vitesse" type="number" style="height:48px;" value="40">
+                <!-- Son label -->
+                <div class="input-group-addon"> km/h</div>
+            </div>
+        </div>
+
+        <br/>
+
+        <!-- Encore un enchaînement de DIV / SPAN durant lequel on stylise un checkbox, cela retourne la même chose qu'un checkbox -->
+        <div class="col-lg-12" style="margin-top:10px;">
+            <div class="form-group">
+            <input type="checkbox" name="filtreStat" id="filtreStat" autocomplete="off" />
+                <div class="[ btn-group ]">
+                <label for="filtreStat" class="[ btn btn-primary ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="filtreStat" class="[ btn btn-default active ]">
+                    Activer le filtre statistique
+                </label>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <!-- DIV contenant deux label avec un input pour un nombre -->
+        <div class="col-lg-12">
+            <div class="input-group">
+                <div class="input-group-addon">
+                     Pour la moyenne, ignorer les valeur > à Moy +/-
+                </div>
+                <input id="ecart" class="form-control inputNombre" name="ecart" type="number" value="1">
+                <div class="input-group-addon">
+                    Sigma
+                </div>
+            </div>
+        </div>
+        <br/>
+
+        <!-- Encore un panel qui se déplie -->
+        <div id="operation" class="panel panel-primary" style="margin-top:120px;margin-bottom:10;">
+            <!-- Son entête -->
+            <div class="panel-heading">
+                <a class="lienBlanc" role="button" data-toggle="collapse" href="#collapseContent3" aria-expanded="false" aria-controls="collapseContent1">Operation</a>
+            </div>
+            <div class="collapse" id="collapseContent3">
+                <!-- Le contenu -->
+                <div class="panel-body">
+                    <!-- Un liste de checkbox stylisé -->
+                    <div id="op" class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary"><input id="min" type="checkbox" name="min" autocomplete="off">Minimum</label>
+                        <label class="btn btn-primary"><input id="max" type="checkbox" name="max" autocomplete="off">Maximum</label>
+                        <label class="btn btn-primary active"><input id="moy" type="checkbox" name="moy" autocomplete="off" CHECKED>Moyenne</label>
+                        <label class="btn btn-primary"><input id="ecarttype" type="checkbox" name="ecarttype" autocomplete="off">Ecart-type</label>
+                        <label class="btn btn-primary"><input id="fusion" type="checkbox" name="fusion" autocomplete="off">Fusion</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Un panel dépliant -->
+        <div id="Tracer" class="panel panel-primary" style="margin-top:0px;margin-bottom:10;">
+            <!-- Entête -->
+            <div class="panel-heading">
+                <a class="lienBlanc" role="button" data-toggle="collapse" href="#collapseContent4" aria-expanded="false" aria-controls="collapseContent1">Tracer</a>
+            </div>
+            <div class="collapse" id="collapseContent4">
+                <!-- Contenu -->
+                <div class="panel-body">
+                    <!-- Dans ce DIV on répête 5 fois la même démarche (une seule est commenté) -->
+                    <!-- Première : -->
+                    <!-- 1e ligne -->
+                    <div class="input-group">
+                        <!-- SPAN avec le checkbox -->
+                        <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                            <input id="seuil1" name="seuil1" type="checkbox" class="form-control" CHECKED>
+                        </span>
+                        <!-- Le label lié à ce checkbox -->
+                        <div class="input-group-addon"> Activer le seuil 1 : <=</div>
+                        <!-- L'input contenant un nombre -->
+                        <input id="note1" class="form-control" name="note1" type="number" style="height:48px;" value="5">
+                        <!-- Le label qui y est lié -->
+                        <div class="input-group-addon"> / 10</div>
+                    </div>
+                    <!-- 2e ligne -->
+                    <div class="cp input-group colorpicker-component" style="margin-top:10px;">
+                        <!-- Le label -->
+                        <div class="input-group-addon"> Couleur du seuil 1 : </div>
+                        <!-- L'input texte retournant un texte représentant une coulmeur en hexa (avec le #) -->
+                        <input id="couleur1" type="text" class="form-control" value="#B9121B"/>
+                        <!-- SPAN qui est stylisé pour permettre l'affichage d'une palette de couleur -->
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+
+                    <!-- Seconde : -->
+                    <div class="input-group" style="margin-top:20px;">
+                        <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                            <input id="seuil2" name="seuil2" type="checkbox" class="form-control" CHECKED>
+                        </span>
+                        <div class="input-group-addon"> Activer le seuil 2 : <=</div>
+                        <input id="note2" class="form-control" name="note2" type="number" style="height:48px;" value="7.5">
+                        <div class="input-group-addon"> / 10</div>
+                    </div>
+                    <div class="cp input-group colorpicker-component" style="margin-top:10px;">
+                        <div class="input-group-addon"> Couleur du seuil 2 : </div>
+                        <input id="couleur2" type="text" class="form-control" value="#01B0F0"/>
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+
+                    <!-- Troisième : -->
+                    <div class="input-group" style="margin-top:20px;">
+                        <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                            <input id="seuil3" name="seuil3" type="checkbox" class="form-control" CHECKED>
+                        </span>
+                        <div class="input-group-addon"> Activer le seuil 3 : <=</div>
+                        <input id="note3" class="form-control" name="note3" type="number" style="height:48px;" value="10">
+                        <div class="input-group-addon"> / 10</div>
+                    </div>
+                    <div class="cp input-group colorpicker-component" style="margin-top:10px;">
+                        <div class="input-group-addon"> Couleur du seuil 3 : </div>
+                        <input id="couleur3" type="text" class="form-control" value="#96CA2D"/>
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+
+                    <!-- Quatrième -->
+                    <div class="input-group" style="margin-top:20px;">
+                        <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                            <input id="seuil4" name="seuil4" type="checkbox" class="form-control">
+                        </span>
+                        <div class="input-group-addon"> Activer le seuil 4 : <=</div>
+                        <input id="note4" class="form-control" name="note4" type="number" style="height:48px;">
+                        <div class="input-group-addon"> / 10</div>
+                    </div>
+                    <div class="cp input-group colorpicker-component" style="margin-top:10px;">
+                        <div class="input-group-addon"> Couleur du seuil 4 : </div>
+                        <input id="couleur4" type="text" class="form-control" />
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+
+                    <!-- Cinquième -->
+                    <div class="input-group" style="margin-top:20px;">
+                        <span class="input-group-addon" style="background-color:#337AB7;border-color:#337AB7;">
+                            <input id="seuil5" name="seuil5" type="checkbox" class="form-control">
+                        </span>
+                        <div class="input-group-addon"> Activer le seuil 5 : <=</div>
+                        <input id="note5" class="form-control" name="note5" type="number" style="height:48px;">
+                        <div class="input-group-addon"> / 10</div>
+                    </div>
+                    <div class="cp input-group colorpicker-component" style="margin-top:10px;">
+                        <div class="input-group-addon"> Couleur du seuil 5 : </div>
+                        <input id="couleur5" type="text" class="form-control" />
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+                </div>
+                <script> $(function() { $('.cp').colorpicker({format: "hex"}); }); </script>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="executeButton" class="btn btn-default" onClick="executeQuery('smartphoneQueriesForm');">Lancer la requête</button>
+
+    </p>

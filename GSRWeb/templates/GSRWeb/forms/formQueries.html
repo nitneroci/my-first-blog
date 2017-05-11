@@ -1,0 +1,21 @@
+<p>
+<h2 class="text-center">Requête</h2>
+<!-- Liste des différente requete (seul smartphone fonctionne) -->
+    <ul class="nav nav-tabs" role="tablist">
+        <!-- Chaque ligne avec leur référence au DIV plus bas -->
+        <li role="presentation"><a href="#common" aria-controls="common" role="tab" data-toggle="tab">Standard</a></li>
+        <li role="presentation"><a href="#simple" aria-controls="simple" role="tab" data-toggle="tab">Simple</a></li>
+        <li role="presentation"><a href="#complex" aria-controls="complex" role="tab" data-toggle="tab">Complexe</a></li>
+        <!-- Le active car c'est celle par défault -->
+        <li role="presentation" class="active"><a href="#smartphone" aria-controls="smartphone" role="tab" data-toggle="tab">Smartphone</a></li>
+    </ul>
+</p>
+<p>
+    <div class="tab-content">
+    <!-- Les DIV liées à chaque ligne de la liste précédente -->
+        <div role="tabpanel" class="tab-pane" id="common">{% include "GSRWeb/forms/commonForm.html" %}</div>
+        <div role="tabpanel" class="tab-pane" id="simple">{% include "GSRWeb/forms/simpleForm.html" %}</div>
+        <div role="tabpanel" class="tab-pane" id="complex">{% include "GSRWeb/forms/complexForm.html" %}</div>
+        <div role="tabpanel" class="tab-pane active" id="smartphone">{% include "GSRWeb/forms/smartphoneForm.html" %}</div>
+    </div>
+</p>

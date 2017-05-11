@@ -1,0 +1,99 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: #f8f8f9;
+}
+#main {
+    width: 100%;
+    height: 100%;
+}
+
+h1{
+    height: 50px;
+    color: #337AB7;
+}
+
+h1 small{
+    color: #73AAF7
+}
+
+h2 {
+    color: #337AB7;
+}
+#optRequ {
+    overflow-y: scroll;
+    width: 30%;
+    height: calc(100% - 300px);
+    display: inline-block;
+}
+
+#map {
+    background-color: #F0B857;
+    width: calc(70% - 10px);
+    height: calc(100% - 300px);
+    float: right;
+    display: inline-block;
+}
+
+#resultRequ {
+    overflow-x: scroll;
+    width: 100%;
+    height: 250px;
+}
+
+.inputNombre {
+    width : 50px;
+}
+
+.lienBlanc, .lienBlanc:hover, .lienBlanc:visited, .lienBlanc:active, .lienBlanc:focus {
+    text-decoration: underline;
+    color: #FFF;
+}
+
+thead {
+    background-color: #337AB7;
+    color: #FFF;
+}
+
+tbody > tr:hover {
+    background-color: rgba(51, 122, 183, 0.5);
+}
+
+#loader {
+    position: fixed;
+    z-index: 9999;
+    background: url('../../static/GSRWeb/images/ring-alt.gif') 50% 50% no-repeat;
+    background-color: #fff;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    cursor: wait;
+    display: none;
+}
+
+#op .btn-primary.active {
+    background-color: #E6E6E6;
+    color : #333;
+}
+
+#informationCurseur {
+    width:300px;
+    height: 50px;
+    background-color: white;
+    position:fixed;
+    top:0px;
+    right:0px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    border-bottom: solid 1px black;
+    border-left: solid 1px black;
+}
+
+#map-canvas {
+    border-left: solid 1px black;
+}

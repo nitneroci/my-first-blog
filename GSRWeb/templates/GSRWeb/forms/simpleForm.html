@@ -1,0 +1,82 @@
+<form id="simpleQueriesForm">
+<p>
+<div id="simpleQueryTitlePane" >
+	<input type="text" name="typeForm" id="typeForm" value="simple" style="display:none" />
+	<button class="buttonAddLine" id="buttonDataSimpleForm" >+</button>
+	<button class="buttonRemoveLine" id="buttonSimpleDataFormRemove" >-</button>
+	<div id="dataSimpleQueries">
+		<div id="simpleLineQuery1" class="cSimpleLineQuery">
+			<select name="dataSimple1" id="dataSimple1" class="cSelectSimple cElementForm" >
+			{% for key, values in dictTablesDatabase.items %}
+				<option value="{{ key }}">{{ key }}</option>
+				{% for value in values %}
+						<option value="{{ key }}:{{ value|first }}">{{ key }}:{{ value|first }}</option>
+				{% endfor %}
+			{% endfor %}
+			</select>
+			<select name="locationSimple1" id="locationSimple1" class="cSelectSimple cElementForm" >
+				{% for location in arrayLocation %}
+					<option value="{{ location }}">{{ location }}</option>
+				{% endfor %}
+			</select>
+			<select name="ageSimple1" id="ageSimple1" class="cSelectSimple cAge cElementForm" >
+				{% for age in arrayNumber %}
+					<option value="{{ age }}">{{ age }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+</div>
+<div id="simpleConditionTitlePane" >
+	<div id="blockCondition">
+		Vérifier <select name="conditionCheckout" id="conditionCheckout" class="cSelectSimple cElementForm" >
+					<option value="all">Tous</option>
+					<option value="atLeast">Au moins une</option>
+					<option value="anything">Aucune</option>
+				</select>
+		pour <select name="conditionRoad" id="conditionRoad" class="cSelectSimple cElementForm" >
+			{% for road in listRoad %}
+				<option value="{{ road|first|cut:' ' }}">{{ road|first|cut:' ' }}</option>
+			{% endfor %}
+		</select>
+	<br><br>
+	</div>
+
+	<button id="buttonConditionSimple" class="buttonAddLine">+</button>
+	<button class="buttonRemoveLine" id="buttonSimpleConditionFormRemove" >-</button>
+		<div id="conditionSimpleQueries" >
+		<div id="simpleLineCondition1" class="cSimpleLineQuery" >
+			<select name="conditionData1" id="conditionData1" class="cSelectSimple cElementForm" >
+			{% for key, values in dictTablesDatabase.items %}
+				{% for value in values %}
+					<option value="{{ key }}:{{ value|first }}">{{ key }}:{{ value|first }}</option>
+				{% endfor %}
+			{% endfor %}
+			</select>
+			<select name="conditionLocation1" id="conditionLocation1" class="cSelectSimple cElementForm" >
+			{% for location in arrayLocation %}
+				{% if location != "Tous" %}
+				<option value="{{ location }}">{{ location }}</option>
+				{% endif %}
+			{% endfor %}
+			</select>
+			<select name="conditionAge1" id="conditionAge1" class="cSelectSimple cElementForm" >
+			{% for age in arrayNumber %}
+				<option value="{{ age }}">{{ age }}</option>
+			{% endfor %}
+			</select>
+			<select name="condition1" id="condition1" class="cSelectSimple cElementForm" >
+				<option value="=">=</option>
+				<option value="<="><=</option>
+				<option value=">=">>=</option>
+				<option value="<"><</option>
+				<option value=">">></option>
+				<option value="<>"><></option>
+			</select>
+			<input class="cValueCondition cElementForm" name="valueCondition1" id="valueCondition1" style="width:40px;" >
+		</div>
+	</div>
+</div>
+<button class="executeButton" >Lancer la requête</button>
+</p>
+</form>

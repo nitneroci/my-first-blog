@@ -1,0 +1,25 @@
+<form id="commonQueriesForm" onload="alert('test')">
+<p>
+<div id="commonDataTitlePane">
+	<input type="text" name="typeForm" id="typeForm" value="common" style="display:none" />
+	<select name="table" id="table" class="cSelect">
+		{% for key, value in dictTablesDatabase.items %}
+			<option value="{{ key }}">{{ key }}</option>
+		{% endfor %}
+			<option value="location">Repérages</option>
+		</select><br />
+		<select name="road" id="road" class="cSelect">
+			<option value="all">Toutes les routes</option>
+				{% for road in listRoad %}
+			<option value="{{ road|first|cut:' ' }}">{{ road|first|cut:' ' }}</option>
+				{% endfor %}
+		</select><br />
+		<select name="age" id="age" class="cSelect">
+			{% for age in arrayNumber %}
+				<option value="{{ age }}">{{ age }}</option>
+			{% endfor %}
+		</select>
+</div>
+<button type="executeButton" onClick="queryDataGrid(map, 'commonQueriesForm');">Lancer la requête</button>
+</p>
+</form>
